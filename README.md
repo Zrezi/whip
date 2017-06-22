@@ -1,4 +1,4 @@
-# WHIP 0.0.3 Pre-Pre-Alpha
+# WHIP 0.0.4 Pre-Pre-Alpha
 
 WHIP is a WebGL Library written to try to abstract some of the lower level WebGL calls into easier-to-understand functions. This project works extremely well with [glMatrix](http://glmatrix.net/) and I would go as far as to say that it's required to get any useful functionality out of the library.
 

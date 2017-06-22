@@ -24,6 +24,8 @@ var WHIP = (function() {
 	 * @since 0.0.1
 	 */
 	var clearFlags = 0;
+	
+	var forceWireframe = false;
 
 	/**
 	 * Fullscreen boolean value.
@@ -420,6 +422,32 @@ var WHIP = (function() {
 			}
 			clearFlags &= ~flag;
 		},
+		
+		/**
+		 * Set wireframe status.
+		 * @param {Boolean} val
+		 * @since 0.0.4
+		 */
+		setWireframe: function(val) {
+			forceWireframe = val;
+		},
+		
+		/**
+		 * Toggle wireframe status.
+		 * @since 0.0.4
+		*/
+		toggleWireframe: function() {
+			forceWireframe = ~forceWireframe;
+		},
+		
+		/**
+		 * Get the wireframe status.
+		 * @return {Boolean} forceWireframe Whether or not wireframe is forced or not.
+		 * @since 0.0.4
+		 */
+		isWireframe: function() {
+			return forceWireframe;
+		},
 
 		/**
 		 * Determines whether or not the key is currently pressed.
@@ -454,19 +482,10 @@ var WHIP = (function() {
 		 * @since 0.0.1
 		 */
 		drawElements: function(style, itemCount) {
-			/*if (
-				style == WHIP.POINTS ||
-				style == WHIP.LINES ||
-				style == WHIP.LINE_STRIP ||
-				style == WHIP.LINE_LOOP ||
-				style == WHIP.TRIANGLES ||
-				style == WHIP.TRIANGLE_STRIP ||
-				style == WHIP.TRIANGLE_FAN
-			) {*/
-				gl.drawElements(style, itemCount, gl.UNSIGNED_SHORT, 0);
-			/*} else {
-				throw new Error("Drawing mode \"" + style + "\" is not valid. Try WHIP.TRIANGLES.");
-			}*/
+			if (forceWireframe) {
+				style = WHIP.LINE_LOOP;
+			}
+			gl.drawElements(style, itemCount, gl.UNSIGNED_SHORT, 0);
 		},
 
 		/**
@@ -476,19 +495,10 @@ var WHIP = (function() {
 		 * @since 0.0.1
 		 */
 		drawArrays: function(style, itemCount) {
-			/*if (
-				style == WHIP.POINTS ||
-				style == WHIP.LINES ||
-				style == WHIP.LINE_STRIP ||
-				style == WHIP.LINE_LOOP ||
-				style == WHIP.TRIANGLES ||
-				style == WHIP.TRIANGLE_STRIP ||
-				style == WHIP.TRIANGLE_FAN
-			) {*/
-				gl.drawArrays(style, 0, itemCount);
-			/*} else {
-				throw new Error("Drawing mode \"" + style + "\" is not valid. Try WHIP.TRIANGLES.");
-			}*/
+			if (forceWireframe) {
+				style = WHIP.LINE_LOOP;
+			}
+			gl.drawArrays(style, 0, itemCount);
 		},
 
 		/**
@@ -812,6 +822,11 @@ var WHIP = (function() {
 				}
 			}
 			
+			/**
+			 * Extension of the image.onload function. But this one is overwritable by the user and
+			 * -should- be set before the image is done loading... I think!
+			 * @since 0.0.3
+			*/
 			onload() {
 				
 			}
