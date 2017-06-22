@@ -25,6 +25,12 @@ var WHIP = (function() {
 	 */
 	var clearFlags = 0;
 	
+	/**
+	 * Force the display to render with gl.LINE_LOOP.
+	 * @private
+	 * @type {Boolean}
+	 * @since 0.0.4
+	 */
 	var forceWireframe = false;
 
 	/**
@@ -356,10 +362,17 @@ var WHIP = (function() {
 		/**
 		 * Set fullscreen status.
 		 * @param {Boolean} val
+		 * #throw {IllegalArgumentException} needs to be boolean true or false
 		 * @since 0.0.1
 		 */
 		setFullscreen: function(val) {
-			fullscreen = val;
+			if (val === true) {
+				fullscreen = true;
+			} else if (val === false) {
+				fullscreen = false;
+			} else {
+				throw new Error("You tried to set fullscreen to \"" + val + "\".");
+			}
 		},
 
 		/**
@@ -426,10 +439,17 @@ var WHIP = (function() {
 		/**
 		 * Set wireframe status.
 		 * @param {Boolean} val
+		 * #throw {IllegalArgumentException} needs to be boolean true or false
 		 * @since 0.0.4
 		 */
 		setWireframe: function(val) {
-			forceWireframe = val;
+			if (val === true) {
+				forceWireframe = true;
+			} else if (val === false) {
+				forceWireframe = false;
+			} else {
+				throw new Error("You tried to set wireframe to \"" + val + "\".");
+			}
 		},
 		
 		/**
@@ -576,7 +596,7 @@ var WHIP = (function() {
 			 */
 			getAttribute(attrib) {
 				if (this[attrib] == null || this[attrib] == undefined) {
-					throw "Attribute is null or undefined!";
+					throw new Error("Attribute \"" + attrib + "\" is null or undefined!");
 					return null;
 				}
 				return this[attrib];
