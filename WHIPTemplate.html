@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>WHIP Template</title>
+		
+		<script type="text/javascript" src="whip.js"></script>
+		
+		<!-- Implement post-init method here or in an external JS file -->
+		<script type="text/javascript">
+		
+			function WHIPPostInit() {
+				WHIP.setClearColor(WHIP.BLACK); // Set clear color to black
+				WHIP.clear(); // Clear the screen
+			}
+			
+		</script>
+		
+	</head>
+	
+	<body oncontextmenu="return false;" onload="WHIP.start()" onresize="WHIP.resize()">
+		<canvas id="webgl-canvas" height="500" width="500"></canvas>
+	</body>
+	
+</html>

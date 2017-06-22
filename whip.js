@@ -73,152 +73,17 @@ var WHIP = (function() {
 	}
 
 	/**
-	 * Grabs the WebGL context from the canvas DOM element and sets the global gl variable.
+	 * Calls all of the initialization functions.
 	 * @private
 	 * @since 0.0.1
 	 */
 	function init() {
 		try {
 
-			// Obtain the canvas element
-			canvas = document.getElementById("webgl-canvas");
-			if (!canvas) {
-				throw new Error("No suitable canvas. Make sure canvas <id> is \"webgl-canvas\".");
-			}
-
-			// Determine whether or not fullscreen is enabled
-			fullscreen = (canvas.getAttribute("fullscreen") == "true") ? true : false;
-
-			// Key handlers
-			document.onkeydown = handleKeyDown;
-			document.onkeyup = handleKeyUp;
-
-			// Initialize all keyFlags to false (instead of undefined!)
-			for (var i = 0; i < 256; i++) {
-				keyFlag[i] = false;
-			}
-
-			// Initialize key event keycodes
-			WHIP.KEY_BACKSPACE = 8;
-			WHIP.KEY_TAB = 9;
-			WHIP.KEY_ENTER = 13;
-			WHIP.KEY_SHIFT = 16;
-			WHIP.KEY_CTRL = 17;
-			WHIP.KEY_ALT = 18;
-			WHIP.KEY_PAUSEBREAK = 19;
-			WHIP.KEY_CAPSLOCK = 20;
-			WHIP.KEY_ESC = 27;
-			WHIP.KEY_SPACE = 32;
-			WHIP.KEY_PAGEUP = 33;
-			WHIP.KEY_PAGEDOWN = 34;
-			WHIP.KEY_END = 35;
-			WHIP.KEY_HOME = 36;
-			WHIP.KEY_LEFT = 37;
-			WHIP.KEY_UP = 38;
-			WHIP.KEY_RIGHT = 39;
-			WHIP.KEY_DOWN = 40;
-			WHIP.KEY_INSERT = 45;
-			WHIP.KEY_DELETE = 46;
-			WHIP.KEY_0 = 48;
-			WHIP.KEY_1 = 49;
-			WHIP.KEY_2 = 50;
-			WHIP.KEY_3 = 51;
-			WHIP.KEY_4 = 52;
-			WHIP.KEY_5 = 53;
-			WHIP.KEY_6 = 54;
-			WHIP.KEY_7 = 55;
-			WHIP.KEY_8 = 56;
-			WHIP.KEY_9 = 57;
-			WHIP.KEY_A = 65;
-			WHIP.KEY_B = 66;
-			WHIP.KEY_C = 67;
-			WHIP.KEY_D = 68;
-			WHIP.KEY_E = 69;
-			WHIP.KEY_F = 70;
-			WHIP.KEY_G = 71;
-			WHIP.KEY_H = 72;
-			WHIP.KEY_I = 73;
-			WHIP.KEY_J = 74;
-			WHIP.KEY_K = 75;
-			WHIP.KEY_L = 76;
-			WHIP.KEY_M = 77;
-			WHIP.KEY_N = 78;
-			WHIP.KEY_O = 79;
-			WHIP.KEY_P = 80;
-			WHIP.KEY_Q = 81;
-			WHIP.KEY_R = 82;
-			WHIP.KEY_S = 83;
-			WHIP.KEY_T = 84;
-			WHIP.KEY_U = 85;
-			WHIP.KEY_V = 86;
-			WHIP.KEY_W = 87;
-			WHIP.KEY_X = 88;
-			WHIP.KEY_Y = 89;
-			WHIP.KEY_Z = 90;
-			WHIP.KEY_WINDOWS = 91;
-			WHIP.KEY_RIGHTCLICK = 93;
-			WHIP.KEY_NUMPAD_0 = 96;
-			WHIP.KEY_NUMPAD_1 = 97;
-			WHIP.KEY_NUMPAD_2 = 98;
-			WHIP.KEY_NUMPAD_3 = 99;
-			WHIP.KEY_NUMPAD_4 = 100;
-			WHIP.KEY_NUMPAD_5 = 101;
-			WHIP.KEY_NUMPAD_6 = 102;
-			WHIP.KEY_NUMPAD_7 = 103;
-			WHIP.KEY_NUMPAD_8 = 104;
-			WHIP.KEY_NUMPAD_9 = 105;
-			WHIP.KEY_NUMPAD_STAR = 106;
-			WHIP.KEY_NUMPAD_PLUS = 107;
-			WHIP.KEY_NUMPAD_MINUS = 109;
-			WHIP.KEY_NUMPAD_PERIOD = 110;
-			WHIP.KEY_NUMPAD_FORWARD_SLASH = 111;
-			WHIP.KEY_F1 = 112;
-			WHIP.KEY_F2 = 113;
-			WHIP.KEY_F3 = 114;
-			WHIP.KEY_F4 = 115;
-			WHIP.KEY_F5 = 116;
-			WHIP.KEY_F6 = 117;
-			WHIP.KEY_F7 = 118;
-			WHIP.KEY_F8 = 119;
-			WHIP.KEY_F9 = 120;
-			WHIP.KEY_F10 = 121;
-			WHIP.KEY_F11 = 122;
-			WHIP.KEY_F12 = 123;
-			WHIP.KEY_NUM_LOCK = 144;
-			WHIP.KEY_SCROLL_LOCK = 145;
-			WHIP.KEY_COMPUTER = 182;
-			WHIP.KEY_CALCULATOR = 183;
-			WHIP.KEY_SEMICOLON = 186;
-			WHIP.KEY_EQUALS = 187;
-			WHIP.KEY_COMMA = 188;
-			WHIP.KEY_DASH = 189;
-			WHIP.KEY_PERIOD = 190;
-			WHIP.KEY_FORWARDSLASH = 191;
-			WHIP.KEY_TICK = 192;
-			WHIP.KEY_SQUARE_LEFT = 219;
-			WHIP.KEY_BACKSLASH = 220;
-			WHIP.KEY_SQUARE_RIGHT = 221;
-			WHIP.KEY_APOSTROPHE = 222;
-
-			// Initialize the WebGL context
-			gl = canvas.getContext("webgl");
-			gl.viewportWidth = canvas.width;
-			gl.viewportHeight = canvas.height;
-			gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
-
-			// Copy over buffer bit values to shortcuts
-			WHIP.COLOR_BUFFER_BIT = gl.COLOR_BUFFER_BIT;
-			WHIP.DEPTH_BUFFER_BIT = gl.DEPTH_BUFFER_BIT;
-			WHIP.STENCIL_BUFFER_BIT = gl.STENCIL_BUFFER_BIT;
-
-			// Copy over drawing mode values to shortcuts
-			WHIP.POINTS = gl.POINTS;
-			WHIP.LINES = gl.LINES;
-			WHIP.LINE_STRIP = gl.LINE_STRIP;
-			WHIP.LINE_LOOP = gl.LINE_LOOP;
-			WHIP.TRIANGLES = gl.TRIANGLES;
-			WHIP.TRIANGLE_STRIP = gl.TRIANGLE_STRIP;
-			WHIP.TRIANGLE_FAN = gl.TRIANGLE_FAN;
+			initGL();
+			initGLStatics();
+			initKeyInput();
+			initColors();
 
 			WHIP.enableClearFlag(WHIP.COLOR_BUFFER_BIT);
 			WHIP.resize();
@@ -229,6 +94,188 @@ var WHIP = (function() {
 			alert("Could not initialise WebGL, sorry :-(");
 		}
 	};
+	
+	/**
+	 * Sets up the WebGL context variable.
+	 * @private
+	 * @since 0.0.2
+	*/
+	function initGL() {
+		// Obtain the canvas element
+		canvas = document.getElementById("webgl-canvas");
+		if (!canvas) {
+			throw new Error("No suitable canvas. Make sure canvas <id> is \"webgl-canvas\".");
+		}
+
+		// Determine whether or not fullscreen is enabled
+		fullscreen = (canvas.getAttribute("fullscreen") == "true") ? true : false;
+		
+		// Initialize the WebGL context
+		gl = canvas.getContext("webgl");
+		gl.viewportWidth = canvas.width;
+		gl.viewportHeight = canvas.height;
+		gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
+	}
+	
+	/**
+	 * Provides a shortcut way to access GL static constants, by using WHIP.<constant>
+	 * instead of having to call WHIP.getGL().<constant> every time you want to use one.
+	 * Really only takes 8 characters out of the call, but it looks better.
+	 * @private
+	 * @since 0.0.2
+	*/
+	function initGLStatics() {
+		// Copy over buffer bit values to shortcuts
+		WHIP.COLOR_BUFFER_BIT = gl.COLOR_BUFFER_BIT;
+		WHIP.DEPTH_BUFFER_BIT = gl.DEPTH_BUFFER_BIT;
+		WHIP.STENCIL_BUFFER_BIT = gl.STENCIL_BUFFER_BIT;
+
+		// Copy over drawing mode values to shortcuts
+		WHIP.POINTS = gl.POINTS;
+		WHIP.LINES = gl.LINES;
+		WHIP.LINE_STRIP = gl.LINE_STRIP;
+		WHIP.LINE_LOOP = gl.LINE_LOOP;
+		WHIP.TRIANGLES = gl.TRIANGLES;
+		WHIP.TRIANGLE_STRIP = gl.TRIANGLE_STRIP;
+		WHIP.TRIANGLE_FAN = gl.TRIANGLE_FAN;
+	}
+	
+	/**
+	 * Sets up keyboard input handlers.
+	 * @private
+	 * @since 0.0.2
+	*/
+	function initKeyInput() {
+		
+		// Key handlers
+		document.onkeydown = handleKeyDown;
+		document.onkeyup = handleKeyUp;
+
+		// Initialize all keyFlags to false (instead of undefined!)
+		for (var i = 0; i < 256; i++) {
+			keyFlag[i] = false;
+		}
+
+		// Initialize key event keycodes
+		WHIP.KEY_BACKSPACE = 8;
+		WHIP.KEY_TAB = 9;
+		WHIP.KEY_ENTER = 13;
+		WHIP.KEY_SHIFT = 16;
+		WHIP.KEY_CTRL = 17;
+		WHIP.KEY_ALT = 18;
+		WHIP.KEY_PAUSEBREAK = 19;
+		WHIP.KEY_CAPSLOCK = 20;
+		WHIP.KEY_ESC = 27;
+		WHIP.KEY_SPACE = 32;
+		WHIP.KEY_PAGEUP = 33;
+		WHIP.KEY_PAGEDOWN = 34;
+		WHIP.KEY_END = 35;
+		WHIP.KEY_HOME = 36;
+		WHIP.KEY_LEFT = 37;
+		WHIP.KEY_UP = 38;
+		WHIP.KEY_RIGHT = 39;
+		WHIP.KEY_DOWN = 40;
+		WHIP.KEY_INSERT = 45;
+		WHIP.KEY_DELETE = 46;
+		WHIP.KEY_0 = 48;
+		WHIP.KEY_1 = 49;
+		WHIP.KEY_2 = 50;
+		WHIP.KEY_3 = 51;
+		WHIP.KEY_4 = 52;
+		WHIP.KEY_5 = 53;
+		WHIP.KEY_6 = 54;
+		WHIP.KEY_7 = 55;
+		WHIP.KEY_8 = 56;
+		WHIP.KEY_9 = 57;
+		WHIP.KEY_A = 65;
+		WHIP.KEY_B = 66;
+		WHIP.KEY_C = 67;
+		WHIP.KEY_D = 68;
+		WHIP.KEY_E = 69;
+		WHIP.KEY_F = 70;
+		WHIP.KEY_G = 71;
+		WHIP.KEY_H = 72;
+		WHIP.KEY_I = 73;
+		WHIP.KEY_J = 74;
+		WHIP.KEY_K = 75;
+		WHIP.KEY_L = 76;
+		WHIP.KEY_M = 77;
+		WHIP.KEY_N = 78;
+		WHIP.KEY_O = 79;
+		WHIP.KEY_P = 80;
+		WHIP.KEY_Q = 81;
+		WHIP.KEY_R = 82;
+		WHIP.KEY_S = 83;
+		WHIP.KEY_T = 84;
+		WHIP.KEY_U = 85;
+		WHIP.KEY_V = 86;
+		WHIP.KEY_W = 87;
+		WHIP.KEY_X = 88;
+		WHIP.KEY_Y = 89;
+		WHIP.KEY_Z = 90;
+		WHIP.KEY_WINDOWS = 91;
+		WHIP.KEY_RIGHTCLICK = 93;
+		WHIP.KEY_NUMPAD_0 = 96;
+		WHIP.KEY_NUMPAD_1 = 97;
+		WHIP.KEY_NUMPAD_2 = 98;
+		WHIP.KEY_NUMPAD_3 = 99;
+		WHIP.KEY_NUMPAD_4 = 100;
+		WHIP.KEY_NUMPAD_5 = 101;
+		WHIP.KEY_NUMPAD_6 = 102;
+		WHIP.KEY_NUMPAD_7 = 103;
+		WHIP.KEY_NUMPAD_8 = 104;
+		WHIP.KEY_NUMPAD_9 = 105;
+		WHIP.KEY_NUMPAD_STAR = 106;
+		WHIP.KEY_NUMPAD_PLUS = 107;
+		WHIP.KEY_NUMPAD_MINUS = 109;
+		WHIP.KEY_NUMPAD_PERIOD = 110;
+		WHIP.KEY_NUMPAD_FORWARD_SLASH = 111;
+		WHIP.KEY_F1 = 112;
+		WHIP.KEY_F2 = 113;
+		WHIP.KEY_F3 = 114;
+		WHIP.KEY_F4 = 115;
+		WHIP.KEY_F5 = 116;
+		WHIP.KEY_F6 = 117;
+		WHIP.KEY_F7 = 118;
+		WHIP.KEY_F8 = 119;
+		WHIP.KEY_F9 = 120;
+		WHIP.KEY_F10 = 121;
+		WHIP.KEY_F11 = 122;
+		WHIP.KEY_F12 = 123;
+		WHIP.KEY_NUM_LOCK = 144;
+		WHIP.KEY_SCROLL_LOCK = 145;
+		WHIP.KEY_COMPUTER = 182;
+		WHIP.KEY_CALCULATOR = 183;
+		WHIP.KEY_SEMICOLON = 186;
+		WHIP.KEY_EQUALS = 187;
+		WHIP.KEY_COMMA = 188;
+		WHIP.KEY_DASH = 189;
+		WHIP.KEY_PERIOD = 190;
+		WHIP.KEY_FORWARDSLASH = 191;
+		WHIP.KEY_TICK = 192;
+		WHIP.KEY_SQUARE_LEFT = 219;
+		WHIP.KEY_BACKSLASH = 220;
+		WHIP.KEY_SQUARE_RIGHT = 221;
+		WHIP.KEY_APOSTROPHE = 222;
+	}
+	
+	/**
+	 * Just some basic color definitions. Might add more...might not.
+	 * @private
+	 * @since 0.0.2
+	*/
+	function initColors() {
+		WHIP.WHITE   = [ 255 / 255, 255 / 255, 255 / 255, 255 / 255 ];
+		WHIP.BLACK   = [   0 / 255,   0 / 255,   0 / 255, 255 / 255 ];
+		WHIP.RED     = [ 255 / 255,   0 / 255,   0 / 255, 255 / 255 ];
+		WHIP.GREEN   = [   0 / 255, 255 / 255,   0 / 255, 255 / 255 ];
+		WHIP.BLUE    = [   0 / 255,   0 / 255, 255 / 255, 255 / 255 ];
+		WHIP.ORANGE  = [ 255 / 255, 165 / 255,   0 / 255, 255 / 255 ];
+		WHIP.YELLOW  = [ 255 / 255, 255 / 255,   0 / 255, 255 / 255 ];
+		WHIP.CYAN    = [   0 / 255, 255 / 255, 255 / 255, 255 / 255 ];
+		WHIP.FUCHSIA = [ 255 / 255,   0 / 255, 255 / 255, 255 / 255 ];
+		WHIP.PURPLE  = [ 127 / 255,   0 / 255, 127 / 255, 255 / 255 ];
+	}
 
 	// Public
 	return {
@@ -401,7 +448,7 @@ var WHIP = (function() {
 		 * @since 0.0.1
 		 */
 		drawElements: function(style, itemCount) {
-			if (
+			/*if (
 				style == WHIP.POINTS ||
 				style == WHIP.LINES ||
 				style == WHIP.LINE_STRIP ||
@@ -409,11 +456,11 @@ var WHIP = (function() {
 				style == WHIP.TRIANGLES ||
 				style == WHIP.TRIANGLE_STRIP ||
 				style == WHIP.TRIANGLE_FAN
-			) {
+			) {*/
 				gl.drawElements(style, itemCount, gl.UNSIGNED_SHORT, 0);
-			} else {
+			/*} else {
 				throw new Error("Drawing mode \"" + style + "\" is not valid. Try WHIP.TRIANGLES.");
-			}
+			}*/
 		},
 
 		/**
@@ -423,7 +470,7 @@ var WHIP = (function() {
 		 * @since 0.0.1
 		 */
 		drawArrays: function(style, itemCount) {
-			if (
+			/*if (
 				style == WHIP.POINTS ||
 				style == WHIP.LINES ||
 				style == WHIP.LINE_STRIP ||
@@ -431,11 +478,11 @@ var WHIP = (function() {
 				style == WHIP.TRIANGLES ||
 				style == WHIP.TRIANGLE_STRIP ||
 				style == WHIP.TRIANGLE_FAN
-			) {
+			) {*/
 				gl.drawArrays(style, 0, itemCount);
-			} else {
+			/*} else {
 				throw new Error("Drawing mode \"" + style + "\" is not valid. Try WHIP.TRIANGLES.");
-			}
+			}*/
 		},
 
 		/**
