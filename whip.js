@@ -109,6 +109,12 @@ var WHIP = (function() {
 
 		// Determine whether or not fullscreen is enabled
 		fullscreen = (canvas.getAttribute("fullscreen") == "true") ? true : false;
+		if (fullscreen) {
+			document.body.style.padding = "0";
+			document.body.style.margin = "0";
+			document.body.style.position = "absolute";
+			document.body.style.overflow = "hidden";
+		}
 		
 		// Initialize the WebGL context
 		gl = canvas.getContext("webgl");
@@ -797,11 +803,17 @@ var WHIP = (function() {
 					gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, self.image);
 					gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 					gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+					self.unbind();
 					self.isLoaded = true;
+					self.onload();
 				}
 				this.image.onerror = function() {
 					throw new Error("Problems loading image from path \"" + imagePath + "\". Check to make sure it exists.");
 				}
+			}
+			
+			onload() {
+				
 			}
 
 			/**
