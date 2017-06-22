@@ -274,21 +274,37 @@ var WHIP = (function() {
 	}
 	
 	/**
-	 * Just some basic color definitions. Might add more...might not.
+	 * Just some basic color definitions.
 	 * @private
 	 * @since 0.0.2
 	*/
 	function initColors() {
-		WHIP.WHITE   = [ 255 / 255, 255 / 255, 255 / 255, 255 / 255 ];
-		WHIP.BLACK   = [   0 / 255,   0 / 255,   0 / 255, 255 / 255 ];
-		WHIP.RED     = [ 255 / 255,   0 / 255,   0 / 255, 255 / 255 ];
-		WHIP.GREEN   = [   0 / 255, 255 / 255,   0 / 255, 255 / 255 ];
-		WHIP.BLUE    = [   0 / 255,   0 / 255, 255 / 255, 255 / 255 ];
-		WHIP.ORANGE  = [ 255 / 255, 165 / 255,   0 / 255, 255 / 255 ];
-		WHIP.YELLOW  = [ 255 / 255, 255 / 255,   0 / 255, 255 / 255 ];
-		WHIP.CYAN    = [   0 / 255, 255 / 255, 255 / 255, 255 / 255 ];
-		WHIP.FUCHSIA = [ 255 / 255,   0 / 255, 255 / 255, 255 / 255 ];
-		WHIP.PURPLE  = [ 127 / 255,   0 / 255, 127 / 255, 255 / 255 ];
+		WHIP.colors = {};
+		WHIP.colors.BLACK      = [   0 / 255,   0 / 255,   0 / 255, 255 / 255 ];
+		WHIP.colors.BLUE       = [   0 / 255,   0 / 255, 255 / 255, 255 / 255 ];
+		WHIP.colors.BROWN      = [ 165 / 255,  42 / 255,  42 / 255, 255 / 255 ];
+		WHIP.colors.CRIMSON    = [ 220 / 255,  20 / 255,  60 / 255, 255 / 255 ];
+		WHIP.colors.CYAN       = [   0 / 255, 255 / 255, 255 / 255, 255 / 255 ];
+		WHIP.colors.DARK_BLUE  = [   0 / 255,   0 / 255, 139 / 255, 255 / 255 ];
+		WHIP.colors.DARK_GREEN = [   0 / 255, 100 / 255,   0 / 255, 255 / 255 ];
+		WHIP.colors.DARK_RED   = [ 139 / 255,   0 / 255,   0 / 255, 255 / 255 ];
+		WHIP.colors.GOLD       = [ 255 / 255, 215 / 255,   0 / 255, 255 / 255 ];
+		WHIP.colors.GREEN      = [   0 / 255, 128 / 255,   0 / 255, 255 / 255 ];
+		WHIP.colors.GREY       = [ 128 / 255, 128 / 255, 128 / 255, 255 / 255 ];
+		WHIP.colors.INDIGO     = [  75 / 255,   0 / 255, 130 / 255, 255 / 255 ];
+		WHIP.colors.LIME       = [   0 / 255, 255 / 255,   0 / 255, 255 / 255 ];
+		WHIP.colors.MAGENTA    = [ 255 / 255,   0 / 255, 255 / 255, 255 / 255 ];
+		WHIP.colors.MAROON     = [ 139 / 255,   0 / 255,   0 / 255, 255 / 255 ];
+		WHIP.colors.ORANGE     = [ 255 / 255, 165 / 255,   0 / 255, 255 / 255 ];
+		WHIP.colors.ORANGERED  = [ 255 / 255,  69 / 255,   0 / 255, 255 / 255 ];
+		WHIP.colors.PINK       = [ 255 / 255, 105 / 255, 180 / 255, 255 / 255 ];
+		WHIP.colors.PURPLE     = [ 127 / 255,   0 / 255, 127 / 255, 255 / 255 ];
+		WHIP.colors.RED        = [ 255 / 255,   0 / 255,   0 / 255, 255 / 255 ];
+		WHIP.colors.SLATE      = [  47 / 255,  79 / 255,  79 / 255, 255 / 255 ];
+		WHIP.colors.TAN        = [ 210 / 255, 180 / 255, 140 / 255, 255 / 255 ];
+		WHIP.colors.VIOLET     = [ 238 / 255, 130 / 255, 238 / 255, 255 / 255 ];
+		WHIP.colors.WHITE      = [ 255 / 255, 255 / 255, 255 / 255, 255 / 255 ];
+		WHIP.colors.YELLOW     = [ 255 / 255, 255 / 255,   0 / 255, 255 / 255 ];
 	}
 
 	// Public
