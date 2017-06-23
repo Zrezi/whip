@@ -1,4 +1,4 @@
-# WHIP 0.0.4 Pre-Pre-Alpha
+# WHIP 0.0.5 Pre-Pre-Alpha
 
 WHIP is a WebGL Library written to try to abstract some of the lower level WebGL calls into easier-to-understand functions. This project works extremely well with [glMatrix](http://glmatrix.net/) and I would go as far as to say that it's required to get any useful functionality out of the library.
 
@@ -53,6 +53,7 @@ After WHIP.start() finishes its initialization process, it will look for a funct
 Definitely (more) on their way...
 
 [Rotating Plane](https://zrezi.github.io/whip-examples/rotating%20plane/rotating_plane.html)
+[Rotating Sphere](https://zrezi.github.io/whip-examples/rotating%20sphere/rotating_sphere.html)
 
 ### Documentation
 
