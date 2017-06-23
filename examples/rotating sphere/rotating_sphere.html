@@ -79,10 +79,9 @@
 				initBuffers();
 				initTexture();
 
-				WHIP.setClearColor(WHIP.colors.BLACK);
+				WHIP.setClearColor(WHIP.COLORS.BLACK);
 				
-				WHIP.getGL().enable(WHIP.getGL().DEPTH_TEST);
-				WHIP.enableClearFlag(WHIP.DEPTH_BUFFER_BIT);
+				WHIP.enableDepthTest();
 				
 				update();
 			}
