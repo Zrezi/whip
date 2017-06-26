@@ -73,7 +73,7 @@
 				initBuffers();
 				initTexture();
 
-				WHIP.setClearColor(WHIP.COLORS.BLACK);
+				WHIP.setClearColor("black");
 				
 				update();
 			}
@@ -153,6 +153,9 @@
 				lastTime = timeNow;
 			}
 			
+			/**
+			 * This example uses the old key detection (using the static WHIP.KEY values).
+			*/
 			function handleKeys() {
 				if (WHIP.ifKeyPressed(WHIP.KEY_TAB)) {
 					xRot = 0;

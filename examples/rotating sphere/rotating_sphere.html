@@ -79,7 +79,7 @@
 				initBuffers();
 				initTexture();
 
-				WHIP.setClearColor(WHIP.COLORS.BLACK);
+				WHIP.setClearColor("black");
 				
 				WHIP.enableDepthTest();
 				
@@ -161,8 +161,11 @@
 				lastTime = timeNow;
 			}
 			
+			/**
+			 * This example uses the new key detection (using strings to make it easier).
+			*/
 			function handleKeys() {
-				if (WHIP.ifKeyPressed(WHIP.KEY_TAB)) {
+				if (WHIP.ifKeyPressed("tab")) {
 					xRot = 0;
 					yRot = 0;
 					zRot = 0;
@@ -170,31 +173,31 @@
 					yRotSpeed = 1;
 					zRotSpeed = 0;
 				}
-				if (WHIP.ifKeyPressed(WHIP.KEY_BACKSPACE)) {
+				if (WHIP.ifKeyPressed("backspace")) {
 					WHIP.toggleWireframe();
 					shaderProgram.setUniform("uIsWireframe", WHIP.isWireframe());
 				}
-				if (WHIP.ifKeyHeld(WHIP.KEY_X)) {
-					if (WHIP.ifKeyHeld(WHIP.KEY_UP)) {
+				if (WHIP.ifKeyHeld("x")) {
+					if (WHIP.ifKeyHeld("up")) {
 						xRotSpeed += rotStep;
 					}
-					if (WHIP.ifKeyHeld(WHIP.KEY_DOWN)) {
+					if (WHIP.ifKeyHeld("down")) {
 						xRotSpeed -= rotStep;
 					}
 				}
-				if (WHIP.ifKeyHeld(WHIP.KEY_Y)) {
-					if (WHIP.ifKeyHeld(WHIP.KEY_UP)) {
+				if (WHIP.ifKeyHeld("y")) {
+					if (WHIP.ifKeyHeld("up")) {
 						yRotSpeed += rotStep;
 					}
-					if (WHIP.ifKeyHeld(WHIP.KEY_DOWN)) {
+					if (WHIP.ifKeyHeld("down")) {
 						yRotSpeed -= rotStep;
 					}
 				}
-				if (WHIP.ifKeyHeld(WHIP.KEY_Z)) {
-					if (WHIP.ifKeyHeld(WHIP.KEY_UP)) {
+				if (WHIP.ifKeyHeld("z")) {
+					if (WHIP.ifKeyHeld("up")) {
 						zRotSpeed += rotStep;
 					}
-					if (WHIP.ifKeyHeld(WHIP.KEY_DOWN)) {
+					if (WHIP.ifKeyHeld("down")) {
 						zRotSpeed -= rotStep;
 					}
 				}

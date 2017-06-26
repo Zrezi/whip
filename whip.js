@@ -215,6 +215,110 @@ var WHIP = (function() {
 		for (var i = 0; i < 256; i++) {
 			keyFlag[i] = false;
 		}
+		
+		WHIP.KEYSTRINGS = {
+			"backspace":       8,
+			"tab":             9,
+			"enter":          13,
+			"shift":          16,
+			"control":        17,
+			"alt":            18,
+			"pausebreak":     19,
+			"caps lock":      20,
+			"escape":         27,
+			"space":          32,
+			"page up":        33,
+			"page down":      34,
+			"end":            35,
+			"home":           36,
+			"left":           37,
+			"up":             38,
+			"right":          39,
+			"down":           40,
+			"insert":         45,
+			"delete":         46,
+			"0":              48,
+			"1":              49,
+			"2":              50,
+			"3":              51,
+			"4":              52,
+			"5":              53,
+			"6":              54,
+			"7":              55,
+			"8":              56,
+			"9":              57,
+			"a":              65,
+			"b":              66,
+			"c":              67,
+			"d":              68,
+			"e":              69,
+			"f":              70,
+			"g":              71,
+			"h":              72,
+			"i":              73,
+			"j":              74,
+			"k":              75,
+			"l":              76,
+			"m":              77,
+			"n":              78,
+			"o":              79,
+			"p":              80,
+			"q":              81,
+			"r":              82,
+			"s":              83,
+			"t":              84,
+			"u":              85,
+			"v":              86,
+			"w":              87,
+			"x":              88,
+			"y":              89,
+			"z":              90,
+			"windows":        91,
+			"menu":           93,
+			"numpad 0":       96,
+			"numpad 1":       97,
+			"numpad 2":       98,
+			"numpad 3":       99,
+			"numpad 4":      100,
+			"numpad 5":      101,
+			"numpad 6":      102,
+			"numpad 7":      103,
+			"numpad 8":      104,
+			"numpad 9":      105,
+			"numpad star":   106,
+			"numpad plus":   107,
+			"numpad minus":  109,
+			"numpad period": 110,
+			"numpad slash":  111,
+			"f1":            112,
+			"f2":            113,
+			"f3":            114,
+			"f4":            115,
+			"f5":            116,
+			"f6":            117,
+			"f7":            118,
+			"f8":            119,
+			"f9":            120,
+			"f10":           121,
+			"f11":           122,
+			"f12":           123,
+			"number lock":   144,
+			"scroll lock":   145,
+			"computer":      182,
+			"calculator":    183,
+			"semicolon":     186,
+			"equals":        187,
+			"comma":         188,
+			"dash":          189,
+			"period":        190,
+			"forward slash": 191,
+			"tick":          192,
+			"grave":         192,
+			"bracket left":  219,
+			"back slash":    220,
+			"bracket right": 221,
+			"apostrophe":    222
+		};
 
 		// Initialize key event keycodes
 		WHIP.KEY_BACKSPACE = 8;
@@ -336,13 +440,14 @@ var WHIP = (function() {
 		WHIP.COLORS.DARK_RED   = [ 139 / 255,   0 / 255,   0 / 255, 255 / 255 ];
 		WHIP.COLORS.GOLD       = [ 255 / 255, 215 / 255,   0 / 255, 255 / 255 ];
 		WHIP.COLORS.GREEN      = [   0 / 255, 128 / 255,   0 / 255, 255 / 255 ];
+		WHIP.COLORS.GRAY       = [ 128 / 255, 128 / 255, 128 / 255, 255 / 255 ];
 		WHIP.COLORS.GREY       = [ 128 / 255, 128 / 255, 128 / 255, 255 / 255 ];
 		WHIP.COLORS.INDIGO     = [  75 / 255,   0 / 255, 130 / 255, 255 / 255 ];
 		WHIP.COLORS.LIME       = [   0 / 255, 255 / 255,   0 / 255, 255 / 255 ];
 		WHIP.COLORS.MAGENTA    = [ 255 / 255,   0 / 255, 255 / 255, 255 / 255 ];
 		WHIP.COLORS.MAROON     = [ 139 / 255,   0 / 255,   0 / 255, 255 / 255 ];
 		WHIP.COLORS.ORANGE     = [ 255 / 255, 165 / 255,   0 / 255, 255 / 255 ];
-		WHIP.COLORS.ORANGERED  = [ 255 / 255,  69 / 255,   0 / 255, 255 / 255 ];
+		WHIP.COLORS.ORANGE_RED = [ 255 / 255,  69 / 255,   0 / 255, 255 / 255 ];
 		WHIP.COLORS.PINK       = [ 255 / 255, 105 / 255, 180 / 255, 255 / 255 ];
 		WHIP.COLORS.PURPLE     = [ 127 / 255,   0 / 255, 127 / 255, 255 / 255 ];
 		WHIP.COLORS.RED        = [ 255 / 255,   0 / 255,   0 / 255, 255 / 255 ];
@@ -384,7 +489,7 @@ var WHIP = (function() {
 			if (typeof WHIPPostInit !== "function") {
 				throw new Error("Need to implement a global function \"WHIPPostInit()\"");
 			}
-			WHIPPostInit()
+			WHIPPostInit();
 		},
 
 		/**
@@ -448,16 +553,101 @@ var WHIP = (function() {
 
 		/**
 		 * Little wrapper for gl.clearColor so you don't have to call WHIP.getGL().clearColor() every time.
-		 * This function can take either an array of 4 colors (RGBA), or 4 individual parameters r, g, b, a.
-		 * @param {Number} r The red component of the clear color.
+		 * This function can take either an array of 4 colors (RGBA), 4 individual parameters (r, g, b, a),
+		 * or a string of the color's name.
+		 * @param {Number} r The red component of the clear color OR an array of 4 values OR a string.
 		 * @param {Number} g The green component of the clear color.
 		 * @param {Number} b The blue component of the clear color.
 		 * @param {Number} a The alpha component of the clear color.
+		 * @throw {IllegalArgumentException} The specified color string isn't an available color.
 		 * @throw {IllegalArgumentException} Wrong number of colors supplied to the call as an array.
 		 * @throw {IllegalArgumentException} Wrong number of colors supplied to the call as individual values.
 		 * @since 0.0.1
 		 */
 		setClearColor: function(r /* ... */ ) {
+			if (typeof r === "string") {
+				switch (r.toLowerCase()) {
+					case "black":
+						WHIP.setClearColor(WHIP.COLORS.BLACK);
+						break;
+					case "blue":
+						WHIP.setClearColor(WHIP.COLORS.BLUE);
+						break;
+					case "brown":
+						WHIP.setClearColor(WHIP.COLORS.BROWN);
+						break;
+					case "cyan":
+						WHIP.setClearColor(WHIP.COLORS.CYAN);
+						break;
+					case "dark blue":
+						WHIP.setClearColor(WHIP.COLORS.DARK_BLUE);
+						break;
+					case "dark green":
+						WHIP.setClearColor(WHIP.COLORS.DARK_GREEN);
+						break;
+					case "dark red":
+						WHIP.setClearColor(WHIP.COLORS.DARK_RED);
+						break;
+					case "gold":
+						WHIP.setClearColor(WHIP.COLORS.GOLD);
+						break;
+					case "green":
+						WHIP.setClearColor(WHIP.COLORS.GREEN);
+						break;
+					case "gray":
+						WHIP.setClearColor(WHIP.COLORS.GREY);
+						break;
+					case "grey":
+						WHIP.setClearColor(WHIP.COLORS.GREY);
+						break;
+					case "indigo":
+						WHIP.setClearColor(WHIP.COLORS.INDIGO);
+						break;
+					case "lime":
+						WHIP.setClearColor(WHIP.COLORS.LIME);
+						break;
+					case "magenta":
+						WHIP.setClearColor(WHIP.COLORS.MAGENTA);
+						break;
+					case "maroon":
+						WHIP.setClearColor(WHIP.COLORS.MAROON);
+						break;
+					case "orange":
+						WHIP.setClearColor(WHIP.COLORS.ORANGE);
+						break;
+					case "orange red":
+						WHIP.setClearColor(WHIP.COLORS.ORANGE_RED);
+						break;
+					case "pink":
+						WHIP.setClearColor(WHIP.COLORS.PINK);
+						break;
+					case "purple":
+						WHIP.setClearColor(WHIP.COLORS.PURPLE);
+						break;
+					case "red":
+						WHIP.setClearColor(WHIP.COLORS.RED);
+						break;
+					case "slate":
+						WHIP.setClearColor(WHIP.COLORS.SLATE);
+						break;
+					case "tan":
+						WHIP.setClearColor(WHIP.COLORS.TAN);
+						break;
+					case "violet":
+						WHIP.setClearColor(WHIP.COLORS.VIOLET);
+						break;
+					case "white":
+						WHIP.setClearColor(WHIP.COLORS.WHITE);
+						break;
+					case "yellow":
+						WHIP.setClearColor(WHIP.COLORS.YELLOW);
+						break;
+					default:
+						throw new Error("Color \"" + r + "\" doesn't exist.");
+						break;
+				}
+				return;
+			}
 			if (r.constructor === Array) {
 				if (r.length != 4) {
 					throw new Error("Wrong number of arguments in array that was passed to WHIP.setClearColor().");
@@ -809,27 +999,52 @@ var WHIP = (function() {
 
 		/**
 		 * Determines whether or not the key is currently pressed.
-		 * @param {Number} key The keyCode of the key.
+		 * @param {Number | String} key The keyCode of the key.
 		 * @return {Boolean} whether or not the key is pressed.
 		 * @since 0.0.1
 		 */
 		ifKeyHeld: function(key) {
-			return (currentlyPressedKeys[key]) ? true : false;
+			var keyvalue;
+			
+			if (typeof key === "string") {
+				keyvalue = WHIP.KEYSTRINGS[key];
+				if (!key) {
+					throw new Error("Key \"" + key + "\" is not valid");
+					return null;
+				}
+			} else {
+				keyvalue = key;
+			}
+			
+			return (currentlyPressedKeys[keyvalue]) ? true : false;
 		},
 
 		/**
 		 * Determines whether or not the key was currently pressed.
 		 * When true, it sets a flag and won't fire again until the key is released.
-		 * @param {Number} key The keyCode of the key.
+		 * @param {Number | String} key The keyCode of the key.
 		 * @return {Boolean} whether or not the key was pressed.
 		 * @since 0.0.1
 		 */
 		ifKeyPressed: function(key) {
+			var keyvalue;
 			var value = false;
-			if (currentlyPressedKeys[key] && keyFlag[key] == false) {
-				value = true;
-				keyFlag[key] = true;
+			
+			if (typeof key === "string") {
+				keyvalue = WHIP.KEYSTRINGS[key];
+				if (!key) {
+					throw new Error("Key \"" + key + "\" is not valid");
+					return null;
+				}
+			} else {
+				keyvalue = key;
 			}
+			
+			if (currentlyPressedKeys[keyvalue] && keyFlag[keyvalue] == false) {
+				value = true;
+				keyFlag[keyvalue] = true;
+			}
+			
 			return value;
 		},
 

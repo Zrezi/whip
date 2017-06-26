@@ -1,4 +1,4 @@
-# WHIP 0.0.6 Pre-Pre-Alpha
+# WHIP 0.0.7 Pre-Pre-Alpha
 
 WHIP is a WebGL Library written to try to abstract some of the lower level WebGL calls into easier-to-understand functions. This project works extremely well with [glMatrix](http://glmatrix.net/) and I would go as far as to say that it's required to get any useful functionality out of the library.
 
@@ -20,7 +20,7 @@ The basis of WHIP is that you should be able to start drawing with WebGL within 
 		<script type="text/javascript">
 		
 			function WHIPPostInit() {
-				WHIP.setClearColor(WHIP.COLORS.BLACK); // Set clear color to black
+				WHIP.setClearColor("black"); // Set clear color to black
 				WHIP.clear(); // Clear the screen
 			}
 			
