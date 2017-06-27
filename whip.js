@@ -1073,6 +1073,26 @@ var WHIP = (function() {
 			}
 			gl.drawArrays(style, 0, itemCount);
 		},
+		
+		/**
+		 * Convert a degree value to a radian value.
+		 * @param {Number} degrees The angle value in degrees.
+		 * @return {Number} the angle in radians.
+		 * @since 0.0.8
+		*/
+		degreesToRadians: function(degrees) {
+			return degrees * Math.PI / 180;
+		},
+		
+		/**
+		 * Convert a radian value to a degree value.
+		 * @param {Number} radians The angle value in radians.
+		 * @return {Number} the angle in degrees.
+		 * @since 0.0.8
+		*/
+		radiansToDegrees: function(radians) {
+			return radians * 180 / Math.PI;
+		},
 
 		/**
 		 * A wrapper for a general case WebGL Shader Program.

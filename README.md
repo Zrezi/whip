@@ -1,4 +1,4 @@
-# WHIP 0.0.7 Pre-Pre-Alpha
+# WHIP 0.0.8 Pre-Pre-Alpha
 
 WHIP is a WebGL Library written to try to abstract some of the lower level WebGL calls into easier-to-understand functions. This project works extremely well with [glMatrix](http://glmatrix.net/) and I would go as far as to say that it's required to get any useful functionality out of the library.
 
@@ -38,7 +38,7 @@ This page will draw a 500x500 black square on the screen, with WebGL! There's a 
 
 ###### Input Capturing
 
-One thing to be aware of is that WHIP consumes input events so as to not affect the HTML page (all input events go straight to the input handler). If you're trying to refresh the screen with CTRL-R, this is why it won't work. I might add a flag to set/unset this functionality, but I prefer it right now.
+One thing to be aware of is that WHIP consumes keyboard input events so as to not affect the HTML page (all input events go straight to the input handler). If you're trying to refresh the screen with CTRL-R, this is why it won't work. I might add a flag to set/unset this functionality, but I prefer it right now.
 
 ###### HTML Body
 
@@ -50,7 +50,7 @@ After WHIP.start() finishes its initialization process, it will look for a funct
 
 ### Examples
 
-Definitely (more) on their way...
+Definitely (more) on their way as I figured out more things...
 
 [Rotating Plane](https://zrezi.github.io/whip-examples/rotating%20plane/rotating_plane.html)
 
@@ -59,3 +59,21 @@ Definitely (more) on their way...
 ### Documentation
 
 The code is commented in [JSDoc](http://usejsdoc.org/) style, but I haven't generated the documentation for it yet. Everything should be fairly easy to read and understand from there.
+
+### Ideas for the Future (maybe)
+
+* GLSL Shader generation
+* Utility functions moved into WHIP
+* Mesh class representing a world object
+* And easier way to draw objects, possibly via an array
+
+### Past "versions" via commit history
+
+* [0.0.1](https://github.com/Zrezi/whip/commit/98fcecba4dc5d1ac0398b6a5b5b65266a0fa69a0) - Initial Commit to Github
+* [0.0.2](https://github.com/Zrezi/whip/commit/063ad7b7a573d4b861cdf3d1b9d07ba20bf81421) - Template and Init rework
+* [0.0.3](https://github.com/Zrezi/whip/commit/75431e4777503e5b57fabda906564cd6c5c99313) - First example
+* [0.0.4](https://github.com/Zrezi/whip/commit/9fe5fcab96346b00634319c87fa5a6e11e3bcab0) - Wireframe toggles
+* [0.0.5](https://github.com/Zrezi/whip/commit/a60944086f7c27660608e97bc10919aee69fa8b9) - Rectangle and Sphere buffer generation
+* [0.0.6](https://github.com/Zrezi/whip/commit/238182ea884b1fc1dc8bab61f853ff0497245703) - Rendering capabilities
+* [0.0.7](https://github.com/Zrezi/whip/commit/634c5a13d2b4c8bb070625ed0f13c70d52100dd1) - Input and Color via strings
+* 0.0.8 - **(Current)** Angle utility functions
