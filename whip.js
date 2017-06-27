@@ -1008,7 +1008,7 @@ var WHIP = (function() {
 			
 			if (typeof key === "string") {
 				keyvalue = WHIP.KEYSTRINGS[key];
-				if (!key) {
+				if (!keyvalue) {
 					throw new Error("Key \"" + key + "\" is not valid");
 					return null;
 				}
@@ -1032,7 +1032,7 @@ var WHIP = (function() {
 			
 			if (typeof key === "string") {
 				keyvalue = WHIP.KEYSTRINGS[key];
-				if (!key) {
+				if (!keyvalue) {
 					throw new Error("Key \"" + key + "\" is not valid");
 					return null;
 				}
@@ -1694,7 +1694,34 @@ var WHIP = (function() {
 				];
 				return new WHIP.Buffer(indices, gl.ELEMENT_ARRAY_BUFFER, gl.INT, 1, 6);
 			}
-		} // end buffer
+		}, // end buffer
+		
+		Mesh: class {
+			
+			constructor(vertices) {
+				
+				/**
+				 * Vertex Buffer
+				 * @type {WHIP.Buffer)
+				*/
+				this.vertices = vertices;
+				
+				//this.textureCoords = null;
+				//this.normals = null;
+				//this.indices = null;
+			}
+			
+			bind() {
+				// gonna have to add binding locations to all of this stuff
+				// instead of default 0 for vertices, 1 for textures, 2 for normals,
+				// etc etc
+			}
+			
+			unbind() {
+				
+			}
+			
+		} // end mesh
 
 	}
 
