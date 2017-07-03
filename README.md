@@ -1,4 +1,4 @@
-# WHIP 0.0.9 Pre-Pre-Alpha
+# WHIP 0.0.10 Pre-Pre-Alpha
 
 WHIP is a WebGL Library written to try to abstract some of the lower level WebGL calls into easier-to-understand functions. This project works extremely well with [glMatrix](http://glmatrix.net/) and I would go as far as to say that it's required to get any useful functionality out of the library.
 
@@ -77,4 +77,5 @@ The code is commented in [JSDoc](http://usejsdoc.org/) style, but I haven't gene
 * [0.0.6](https://github.com/Zrezi/whip/commit/238182ea884b1fc1dc8bab61f853ff0497245703) - Rendering capabilities
 * [0.0.7](https://github.com/Zrezi/whip/commit/634c5a13d2b4c8bb070625ed0f13c70d52100dd1) - Input and Color via strings
 * [0.0.8](https://github.com/Zrezi/whip/commit/bea95bb20e2ebed9c0239f378dc2d3bb60583886) - Angle utility functions
-* 0.0.9 - **(Current)** Mesh Utility
+* 0.0.9 - Mesh Utility
+* 0.0.10 - **Current** Removed input handling, moved to separate project [Tiny Input](https://github.com/Zrezi/TinyInput). All examples will be broken :(
