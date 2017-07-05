@@ -15,8 +15,9 @@
 		</style>
 
 		<script type="text/javascript" src="../gl-matrix-min.js"></script>
-		<script type="text/javascript" src="../../whip.js"></script>
-
+		<script type="text/javascript" src="../../whip-0.0.10.js"></script>
+		<script type="text/javascript" src="../tinyinput-min.js"></script>
+	
 		<script id="shader-fs" type="fs">
 			precision mediump float;
 
@@ -72,6 +73,10 @@
 				initShaders();
 				initBuffers();
 				initTexture();
+				
+				TI.init();
+				TI.enableKeyboard();
+				TI.disableDefaults();
 
 				WHIP.setClearColor("black");
 				
@@ -157,36 +162,36 @@
 			 * This example uses the old key detection (using the static WHIP.KEY values).
 			*/
 			function handleKeys() {
-				if (WHIP.ifKeyPressed(WHIP.KEY_TAB)) {
+				if (TI.keyPressed("tab")) {
 					xRot = 0;
 					yRot = 0;
 					zRot = 0;
 				}
-				if (WHIP.ifKeyPressed(WHIP.KEY_BACKSPACE)) {
+				if (TI.keyPressed("backspace")) {
 					WHIP.toggleWireframe();
 					shaderProgram.setUniform("uIsWireframe", WHIP.isWireframe());
 				}
-				if (WHIP.ifKeyHeld(WHIP.KEY_X)) {
-					if (WHIP.ifKeyHeld(WHIP.KEY_UP)) {
+				if (TI.keyHeld("x")) {
+					if (TI.keyHeld("up")) {
 						xRot += 2;
 					}
-					if (WHIP.ifKeyHeld(WHIP.KEY_DOWN)) {
+					if (TI.keyHeld("down")) {
 						xRot -= 2;
 					}
 				}
-				if (WHIP.ifKeyHeld(WHIP.KEY_Y)) {
-					if (WHIP.ifKeyHeld(WHIP.KEY_UP)) {
+				if (TI.keyHeld("y")) {
+					if (TI.keyHeld("up")) {
 						yRot += 2;
 					}
-					if (WHIP.ifKeyHeld(WHIP.KEY_DOWN)) {
+					if (TI.keyHeld("down")) {
 						yRot -= 2;
 					}
 				}
-				if (WHIP.ifKeyHeld(WHIP.KEY_Z)) {
-					if (WHIP.ifKeyHeld(WHIP.KEY_UP)) {
+				if (TI.keyHeld("z")) {
+					if (TI.keyHeld("up")) {
 						zRot += 2;
 					}
-					if (WHIP.ifKeyHeld(WHIP.KEY_DOWN)) {
+					if (TI.keyHeld("down")) {
 						zRot -= 2;
 					}
 				}

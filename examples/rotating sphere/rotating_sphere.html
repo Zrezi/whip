@@ -15,7 +15,8 @@
 		</style>
 
 		<script type="text/javascript" src="../gl-matrix-min.js"></script>
-		<script type="text/javascript" src="../../whip.js"></script>
+		<script type="text/javascript" src="../../whip-0.0.10.js"></script>
+		<script type="text/javascript" src="../tinyinput-min.js"></script>
 
 		<script id="shader-fs" type="fs">
 			precision mediump float;
@@ -78,6 +79,10 @@
 				initShaders();
 				initBuffers();
 				initTexture();
+				
+				TI.init();
+				TI.enableKeyboard();
+				TI.disableDefaults();
 
 				WHIP.setClearColor("black");
 				
@@ -165,7 +170,7 @@
 			 * This example uses the new key detection (using strings to make it easier).
 			*/
 			function handleKeys() {
-				if (WHIP.ifKeyPressed("tab")) {
+				if (TI.keyPressed("tab")) {
 					xRot = 0;
 					yRot = 0;
 					zRot = 0;
@@ -173,31 +178,31 @@
 					yRotSpeed = 1;
 					zRotSpeed = 0;
 				}
-				if (WHIP.ifKeyPressed("backspace")) {
+				if (TI.keyPressed("backspace")) {
 					WHIP.toggleWireframe();
 					shaderProgram.setUniform("uIsWireframe", WHIP.isWireframe());
 				}
-				if (WHIP.ifKeyHeld("x")) {
-					if (WHIP.ifKeyHeld("up")) {
+				if (TI.keyHeld("x")) {
+					if (TI.keyHeld("up")) {
 						xRotSpeed += rotStep;
 					}
-					if (WHIP.ifKeyHeld("down")) {
+					if (TI.keyHeld("down")) {
 						xRotSpeed -= rotStep;
 					}
 				}
-				if (WHIP.ifKeyHeld("y")) {
-					if (WHIP.ifKeyHeld("up")) {
+				if (TI.keyHeld("y")) {
+					if (TI.keyHeld("up")) {
 						yRotSpeed += rotStep;
 					}
-					if (WHIP.ifKeyHeld("down")) {
+					if (TI.keyHeld("down")) {
 						yRotSpeed -= rotStep;
 					}
 				}
-				if (WHIP.ifKeyHeld("z")) {
-					if (WHIP.ifKeyHeld("up")) {
+				if (TI.keyHeld("z")) {
+					if (TI.keyHeld("up")) {
 						zRotSpeed += rotStep;
 					}
-					if (WHIP.ifKeyHeld("down")) {
+					if (TI.keyHeld("down")) {
 						zRotSpeed -= rotStep;
 					}
 				}
